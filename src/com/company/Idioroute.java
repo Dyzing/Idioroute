@@ -2,10 +2,7 @@ package com.company;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
-
 
 public class Idioroute {
     private List<Autoroute> l_autoroute;
@@ -19,28 +16,6 @@ public class Idioroute {
     {
         Vehicule v = new Vehicule();
         l_autoroute.get(4).getL_vehicule().add(v);
-    }
-
-    public void generate_vehicule()
-    {
-        Random random = new Random();
-        int random_value = random.nextInt(1+3) + 1;
-        Vehicule v;
-        if (random_value == 1)
-        {
-            v = new Voiture();
-        }
-        if (random_value == 2)
-        {
-            v = new Moto();
-        }
-        else {
-
-            v = new Camion();
-        }
-
-        l_autoroute.get(0).getL_vehicule().add(v);
-
     }
 
     public void change_autoroute_car(int i, Autoroute autoroute_a, Autoroute autoroute_b)
