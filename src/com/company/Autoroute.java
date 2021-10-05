@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Autoroute {
-    private int id_autoroute;
+    public static int id_autoroute;
     private List<Acces> l_acces;
     private List<Vehicule> l_vehicule;
     private int nb_acces;
@@ -13,6 +13,7 @@ public class Autoroute {
 
     public Autoroute(int nb_acces)
     {
+        ++id_autoroute;
         this.circonference = id_autoroute * 50;
         this.nb_acces = l_acces.size();
         this.l_vehicule = new ArrayList<>();
@@ -92,5 +93,63 @@ public class Autoroute {
 
     public void setNb_acces(int nb_acces) {
         this.nb_acces = nb_acces;
+    }
+
+    public Vehicule move_car(int id)
+    {
+        Vehicule v = l_vehicule.get(id);
+        v.setPosition(v.getPosition() + v.getVitesse());
+
+        return v;
+    }
+
+    public void prediction_move_car(int id)
+    {
+        Vehicule v;
+        boolean bAccident = true;
+        int nb_vehicule = l_vehicule.size();
+        for (int i = 0; i < nb_vehicule; i++)
+        {
+            if(l_vehicule.get(i).idVehicule == id)
+            {
+                v = l_vehicule.get(i);
+                for (int j = i; j < nb_vehicule - 1; j++)
+                {
+                    Vehicule a, b;
+                    a = v;
+                    b = l_vehicule.get(j+1);
+
+                    try {
+                        int positionA, positionB;
+                        positionA = move_car(move_car(a.getIdVehicule()).getIdVehicule()).getPosition();
+                        positionB = move_car(move_car(a.getIdVehicule()).getIdVehicule()).getPosition();
+                        if (positionA >= positionB)
+                        {
+                            for (int k = 0; k < nb_acces; k++)
+                            {
+                                if((a.getPosition() <= l_acces.get(k).getEmplacement()) && (l_acces.get(k).getEmplacement() <= b.getPosition()))
+                                {
+                                    //gerer l'évitemment de accident -> appel à une fonction d'Idioroute avec acces et voiture en paramètre
+                                    bAccident = false;
+                                    break;
+                                }
+                            }
+                            if(bAccident == true)
+                            {
+                                throw new Exception();
+                            }
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        System.out.println(e.getMessage());
+                        System.out.println("Accident");
+                    }
+                }
+
+                v = move_car(i);
+                break;
+            }
+        }
     }
 }

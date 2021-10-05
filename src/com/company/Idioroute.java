@@ -18,13 +18,13 @@ public class Idioroute {
         l_autoroute.get(4).getL_vehicule().add(v);
     }
 
-    public void move_car(int i, Autoroute autoroute_a, Autoroute autoroute_b)
+    public void change_autoroute_car(int i, Autoroute autoroute_a, Autoroute autoroute_b)
     {
         Vehicule v_to_move = autoroute_a.getL_vehicule().get(i);
-        /*if(v_to_move.getPosition() == autoroute_a.getL_acces().get(autoroute_a.getNb_acces()).getEmplacement())
+        if(v_to_move.getPosition() == autoroute_a.getL_acces().get(autoroute_a.getNb_acces()).getEmplacement())
         {
             autoroute_a.getL_vehicule().remove(v_to_move);
             autoroute_b.getL_vehicule().add(v_to_move);
-        }*/
+        }
     }
 }
