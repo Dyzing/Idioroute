@@ -106,6 +106,7 @@ public class Autoroute {
     public void prediction_move_car(int id)
     {
         Vehicule v;
+        Vehicule w;
         boolean bAccident = true;
         int nb_vehicule = l_vehicule.size();
         for (int i = 0; i < nb_vehicule; i++)
@@ -113,23 +114,25 @@ public class Autoroute {
             if(l_vehicule.get(i).idVehicule == id)
             {
                 v = l_vehicule.get(i);
+                w = l_vehicule.get(i + 1);
                 for (int j = i; j < nb_vehicule - 1; j++)
                 {
                     Vehicule a, b;
-                    a = v;
+                    a = l_vehicule.get(i);
                     b = l_vehicule.get(j+1);
 
                     try {
                         int positionA, positionB;
                         positionA = move_car(move_car(a.getIdVehicule()).getIdVehicule()).getPosition();
-                        positionB = move_car(move_car(a.getIdVehicule()).getIdVehicule()).getPosition();
+                        positionB = move_car(move_car(b.getIdVehicule()).getIdVehicule()).getPosition();
                         if (positionA >= positionB)
                         {
                             for (int k = 0; k < nb_acces; k++)
                             {
-                                if((a.getPosition() <= l_acces.get(k).getEmplacement()) && (l_acces.get(k).getEmplacement() <= b.getPosition()))
+                                if((v.getPosition() <= l_acces.get(k).getEmplacement()) && (l_acces.get(k).getEmplacement() <= w.getPosition()))
                                 {
                                     //gerer l'évitemment de accident -> appel à une fonction d'Idioroute avec acces et voiture en paramètre
+                                    v.setNeed_move(true);
                                     bAccident = false;
                                     break;
                                 }

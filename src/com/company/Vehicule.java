@@ -9,7 +9,15 @@ public class Vehicule {
     int idVehicule;
     int idAutoroute;
     int position;
+    boolean need_move;
 
+    public boolean isNeed_move() {
+        return need_move;
+    }
+
+    public void setNeed_move(boolean need_move) {
+        this.need_move = need_move;
+    }
 
     public int getVitesse() {
         return vitesse;
@@ -48,7 +56,7 @@ public class Vehicule {
         this.idVehicule = genId.getAndIncrement();
         this.idAutoroute = 5;
         this.position = 0;
-
+        this.need_move = false;
 
     }
 }

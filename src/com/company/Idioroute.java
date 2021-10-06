@@ -50,4 +50,46 @@ public class Idioroute {
             autoroute_b.getL_vehicule().add(v_to_move);
         }
     }
+
+    public void gestion_accident()
+    {
+        boolean updated = false;
+        int list_auto_size = l_autoroute.size();
+        for (int i = 0; i < list_auto_size; i++)
+        {
+            List<Acces> l_acces = l_autoroute.get(i).getL_acces();
+            List<Vehicule> l_vehicule = l_autoroute.get(i).getL_vehicule();
+
+            int list_vehi_size = l_vehicule.size();
+            for (int j = 0; j < list_vehi_size; j++)
+            {
+                Vehicule v = l_vehicule.get(j);
+                if(v.isNeed_move() == true)
+                {
+                    int list_acces_size = l_acces.size();
+                    for(int k = 0; k < list_acces_size; k++)
+                    {
+                        if(v.getPosition() == l_acces.get(k).getEmplacement())
+                        {
+                            l_vehicule.remove(v);
+                            if(i == 0)
+                            {
+                                l_autoroute.get(i + 1).getL_vehicule().add(v);
+                            }
+                            else
+                            {
+                                l_autoroute.get(i - 1).getL_vehicule().add(v);
+                            }
+                            updated = true;
+                        }
+                        if(updated)
+                        {
+                            updated = false;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
