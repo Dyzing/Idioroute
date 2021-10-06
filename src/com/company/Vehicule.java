@@ -59,6 +59,17 @@ public class Vehicule {
         this.need_move = false;
 
     }
+
+    @Override
+    public String toString() {
+        return "Vehicule{" +
+                "vitesse=" + vitesse +
+                ", idVehicule=" + idVehicule +
+                ", idAutoroute=" + idAutoroute +
+                ", position=" + position +
+                ", need_move=" + need_move +
+                '}';
+    }
 }
 
 

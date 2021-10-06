@@ -1,10 +1,7 @@
 package com.company;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Idioroute {
     private List<Autoroute> l_autoroute;
@@ -27,28 +24,31 @@ public class Idioroute {
         this.l_autoroute.add(a5);
         this.l_autoroute.add(a6);
 
-        System.out.println(this.l_autoroute.size());
     }
 
     public void generate_vehicule()
     {
+
         Random random = new Random();
-        int random_value = random.nextInt(1+3) + 1;
+        int random_value = random.nextInt(3)+1 ;
+        System.out.println(random_value);
         Vehicule v;
         if (random_value == 1)
         {
             v = new Voiture();
         }
-        if (random_value == 2)
+        else if (random_value == 2)
         {
             v = new Moto();
         }
-        else {
-
+        else
+        {
             v = new Camion();
         }
 
-        l_autoroute.get(0).getL_vehicule().add(v);
+        List<Vehicule> lv = l_autoroute.get(0).getL_vehicule();
+        lv.add(v);
+        System.out.println(lv.get(lv.size()-1).toString());
 
     }
 
@@ -67,6 +67,8 @@ public class Idioroute {
             autoroute_b.getL_vehicule().add(v_to_move);
         }
     }
+
+
 
     public void gestion_accident()
     {
@@ -111,8 +113,17 @@ public class Idioroute {
     }
 
 
-    /*public void panne()
-    {
+   public void run()
+   {
 
-    }*/
+       Timer timer = new Timer();
+       TimerTask task = new TimerTask() {
+           @Override
+           public void run() {
+               generate_vehicule();
+               gestion_accident();
+           }
+       };
+       timer.scheduleAtFixedRate(task, 0,1000);//wait 0 ms before doing the action and do it evry 1000ms (1second)
+   }
 }
