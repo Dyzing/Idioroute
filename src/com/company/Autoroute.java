@@ -103,8 +103,6 @@ public class Autoroute {
     {
         Vehicule v = l_vehicule.get(id);
         v.setPosition(v.getPosition() + v.getVitesse());
-
-
         return v;
     }
 
@@ -121,7 +119,7 @@ public class Autoroute {
         Vehicule w;
         boolean bAccident = true;
         int nb_vehicule = l_vehicule.size();
-        for (int i = 0; i < nb_vehicule; i++)
+        for (int i = 0; i < nb_vehicule-1; i++)
         {
             if(l_vehicule.get(i).idVehicule == id)
             {
@@ -163,6 +161,7 @@ public class Autoroute {
                 }
 
                 v = move_car(i);
+                System.out.println(v.toString());
                 break;
             }
         }

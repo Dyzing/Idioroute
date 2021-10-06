@@ -120,7 +120,18 @@ public class Idioroute {
            @Override
            public void run() {
                generate_vehicule();
-               gestion_accident();
+               for (int i = 0; i < l_autoroute.size(); i++)
+               {
+                   List<Vehicule> l_vehicule = l_autoroute.get(i).getL_vehicule();
+                   int list_vehi_size = l_vehicule.size();
+                   for (int j = 0; j < list_vehi_size; j++)
+                   {
+                       Vehicule v = l_vehicule.get(j);
+                       int id = v.getIdVehicule();
+                       l_autoroute.get(i).prediction_move_car(id);
+                   }
+               }
+
            }
        };
        timer.scheduleAtFixedRate(task, 0,1000);//wait 0 ms before doing the action and do it evry 1000ms (1second)
