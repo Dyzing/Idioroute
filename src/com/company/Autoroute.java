@@ -121,7 +121,7 @@ public class Autoroute {
         int nb_vehicule = l_vehicule.size();
         for (int i = 0; i < nb_vehicule-1; i++)
         {
-            if(l_vehicule.get(i).idVehicule == id)
+            if(l_vehicule.get(i).getIdVehicule() == id)
             {
                 v = l_vehicule.get(i);
                 w = l_vehicule.get(i + 1);
