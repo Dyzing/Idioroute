@@ -8,21 +8,10 @@ public class Idioroute {
 
     public Idioroute()
     {
-        Autoroute a1 = new Autoroute();
-        Autoroute a2 = new Autoroute();
-        Autoroute a3 = new Autoroute();
-        Autoroute a4 = new Autoroute();
-        Autoroute a5 = new Autoroute();
-        Autoroute a6 = new Autoroute();
-
         this.l_autoroute = new ArrayList<Autoroute>(5);
 
-        this.l_autoroute.add(a1);
-        this.l_autoroute.add(a2);
-        this.l_autoroute.add(a3);
-        this.l_autoroute.add(a4);
-        this.l_autoroute.add(a5);
-        this.l_autoroute.add(a6);
+        for (int i = 0; i < 5; i++)
+            this.l_autoroute.add(new Autoroute());
 
     }
 
@@ -58,13 +47,23 @@ public class Idioroute {
         l_autoroute.get(4).getL_vehicule().add(v);
     }
 
-    public void change_autoroute_car(int i, Autoroute autoroute_a, Autoroute autoroute_b)
+    public void tour_complet(int i, Autoroute autoroute_a, Autoroute autoroute_b)
     {
         Vehicule v_to_move = autoroute_a.getL_vehicule().get(i);
         if(v_to_move.getPosition() == autoroute_a.getL_acces().get(autoroute_a.getNb_acces()).getEmplacement())
         {
             autoroute_a.getL_vehicule().remove(v_to_move);
             autoroute_b.getL_vehicule().add(v_to_move);
+            Autoroute auto_actuelle = l_autoroute.get(v_to_move.getIdAutoroute());
+            auto_actuelle.getL_vehicule().remove(v_to_move);
+            if(v_to_move.getIdAutoroute() == 0)
+            {
+                l_autoroute.get(v_to_move.getIdAutoroute() + 1).getL_vehicule().add(v_to_move);
+            }
+            else
+            {
+                l_autoroute.get(v_to_move.getIdAutoroute() - 1).getL_vehicule().add(v_to_move);
+            }
         }
     }
 
