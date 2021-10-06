@@ -16,8 +16,12 @@ public class Autoroute {
         ++id_autoroute;
         this.circonference = id_autoroute * 50;
         this.nb_acces = l_acces.size();
-        this.l_vehicule = new ArrayList<>();
-        this.l_acces = new ArrayList<>(nb_acces);
+        this.l_vehicule = new ArrayList<Vehicule>();
+
+        this.l_acces = new ArrayList<Acces>(nb_acces); //risque de péter car il n'y a rien dedans
+        for (int i = 0; i < nb_acces; i++)
+            this.l_acces.add(new Acces());
+
         int mat_rand = (int)Math.floor(Math.random()*(3-1+1)+1);
         switch (mat_rand)
         {
@@ -99,8 +103,14 @@ public class Autoroute {
     {
         Vehicule v = l_vehicule.get(id);
         v.setPosition(v.getPosition() + v.getVitesse());
-
         return v;
+    }
+
+    public int simulation_move_car(int id)
+    {
+        Vehicule v = l_vehicule.get(id);
+        int res = v.getPosition() + v.getVitesse();
+        return res;
     }
 
     public void prediction_move_car(int id)
@@ -123,8 +133,8 @@ public class Autoroute {
 
                     try {
                         int positionA, positionB;
-                        positionA = move_car(move_car(a.getIdVehicule()).getIdVehicule()).getPosition();
-                        positionB = move_car(move_car(b.getIdVehicule()).getIdVehicule()).getPosition();
+                        positionA = simulation_move_car(simulation_move_car(a.getIdVehicule()));
+                        positionB = simulation_move_car(simulation_move_car(b.getIdVehicule()));
                         if (positionA >= positionB)
                         {
                             for (int k = 0; k < nb_acces; k++)
