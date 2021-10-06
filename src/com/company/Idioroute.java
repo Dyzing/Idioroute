@@ -2,6 +2,7 @@ package com.company;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -10,7 +11,23 @@ public class Idioroute {
 
     public Idioroute()
     {
-        l_autoroute = new ArrayList<>(5);
+        Autoroute a1 = new Autoroute();
+        Autoroute a2 = new Autoroute();
+        Autoroute a3 = new Autoroute();
+        Autoroute a4 = new Autoroute();
+        Autoroute a5 = new Autoroute();
+        Autoroute a6 = new Autoroute();
+
+        this.l_autoroute = new ArrayList<Autoroute>(5);
+
+        this.l_autoroute.add(a1);
+        this.l_autoroute.add(a2);
+        this.l_autoroute.add(a3);
+        this.l_autoroute.add(a4);
+        this.l_autoroute.add(a5);
+        this.l_autoroute.add(a6);
+
+        System.out.println(this.l_autoroute.size());
     }
 
     public void generate_vehicule()
@@ -92,4 +109,10 @@ public class Idioroute {
             }
         }
     }
+
+
+    /*public void panne()
+    {
+
+    }*/
 }

@@ -44,10 +44,10 @@ public class Autoroute {
     public Autoroute()
     {
         this.circonference = id_autoroute * 50;
-        this.nb_acces = l_acces.size();
-        this.l_vehicule = new ArrayList<>();
+        this.l_vehicule = new ArrayList<Vehicule>();
         int rand_nb_acces = (int)Math.floor(Math.random()*(6-2+1)+2);
-        this.l_acces = new ArrayList<>(rand_nb_acces);
+        this.l_acces = new ArrayList<Acces>(rand_nb_acces);
+        this.nb_acces = l_acces.size();
         int mat_rand = (int)Math.floor(Math.random()*(3-1+1)+1);
         switch (mat_rand)
         {
@@ -155,4 +155,5 @@ public class Autoroute {
             }
         }
     }
+
 }
