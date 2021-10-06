@@ -113,12 +113,12 @@ public class Idioroute {
 
    public void run()
    {
-
+       generate_vehicule();
        Timer timer = new Timer();
        TimerTask task = new TimerTask() {
            @Override
            public void run() {
-               generate_vehicule();
+
                System.out.println("nb auto : " + l_autoroute.size());
                for (int i = 0; i < l_autoroute.size(); i++)
                {
@@ -133,11 +133,13 @@ public class Idioroute {
                        System.out.println("Info du vehicule avant prediction : " + v.toString());
                        int id = v.getIdVehicule();
                        l_autoroute.get(i).prediction_move_car(id);
+                       generate_vehicule();
+                       gestion_accident();
                    }
                }
 
            }
        };
-       timer.scheduleAtFixedRate(task, 0,1000);//wait 0 ms before doing the action and do it evry 1000ms (1second)
+       timer.scheduleAtFixedRate(task, 0,2000);//wait 0 ms before doing the action and do it evry 1000ms (1second)
    }
 }
