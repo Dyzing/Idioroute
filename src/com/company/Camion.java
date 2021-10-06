@@ -11,7 +11,7 @@ public class Camion extends Vehicule {
 
     @Override
     public String toString() {
-        return "Voiture{" +
+        return "Camion{" +
                 "vitesse=" + vitesse +
                 ", idAutoroute=" + idAutoroute +
                 ", idVehicule=" + idVehicule +

@@ -11,7 +11,7 @@ public class Moto extends Vehicule{
 
     @Override
     public String toString() {
-        return "Voiture{" +
+        return "Moto{" +
                 "vitesse=" + vitesse +
                 ", idAutoroute=" + idAutoroute +
                 ", idVehicule=" + idVehicule +

@@ -161,7 +161,7 @@ public class Autoroute {
                 }
 
                 v = move_car(i);
-                System.out.println(v.toString());
+                System.out.println("Un vehicule a bougé : " + v.toString());
                 break;
             }
         }

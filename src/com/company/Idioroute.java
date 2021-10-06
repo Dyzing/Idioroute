@@ -20,7 +20,6 @@ public class Idioroute {
 
         Random random = new Random();
         int random_value = random.nextInt(3)+1 ;
-        System.out.println(random_value);
         Vehicule v;
         if (random_value == 1)
         {
@@ -37,7 +36,7 @@ public class Idioroute {
 
         List<Vehicule> lv = l_autoroute.get(0).getL_vehicule();
         lv.add(v);
-        System.out.println(lv.get(lv.size()-1).toString());
+        System.out.println("Une vehicule vient de se rajouter : " + lv.get(lv.size()-1).toString());
 
     }
 
@@ -120,13 +119,18 @@ public class Idioroute {
            @Override
            public void run() {
                generate_vehicule();
+               System.out.println("nb auto : " + l_autoroute.size());
                for (int i = 0; i < l_autoroute.size(); i++)
                {
                    List<Vehicule> l_vehicule = l_autoroute.get(i).getL_vehicule();
                    int list_vehi_size = l_vehicule.size();
+                   System.out.println("autoroute n°" + i + " nb vehi : " + list_vehi_size);
+
                    for (int j = 0; j < list_vehi_size; j++)
                    {
+                       System.out.println("rentre dans prediction ?");
                        Vehicule v = l_vehicule.get(j);
+                       System.out.println("Info du vehicule avant prediction : " + v.toString());
                        int id = v.getIdVehicule();
                        l_autoroute.get(i).prediction_move_car(id);
                    }
