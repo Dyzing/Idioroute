@@ -2,14 +2,14 @@ package com.company;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Vehicule {
+public abstract class Vehicule {
 
     public static AtomicInteger genId = new AtomicInteger();
-    int vitesse;
-    int idVehicule;
-    int idAutoroute;
-    int position;
-    boolean need_move;
+    private int vitesse = 10;
+    private int idVehicule;
+    private int idAutoroute;
+    private int position;
+    private boolean need_move;
 
     public boolean isNeed_move() {
         return need_move;

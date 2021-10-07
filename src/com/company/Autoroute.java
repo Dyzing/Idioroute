@@ -125,7 +125,7 @@ public class Autoroute {
         System.out.println("nombre de vehicule dans prediction : " + nb_vehicule);
         for (int i = 0; i < nb_vehicule-1; i++)
         {
-            if(l_vehicule.get(i).idVehicule == id)
+            if(l_vehicule.get(i).getIdVehicule() == id)
             {
                 v = l_vehicule.get(i + 1);
                 w = l_vehicule.get(i);

@@ -41,11 +41,7 @@ public class Idioroute {
 
     }
 
-    public void add_car()
-    {
-        Vehicule v = new Vehicule();
-        l_autoroute.get(4).getL_vehicule().add(v);
-    }
+
 
     public void tour_complet(int i, Autoroute autoroute_a, Autoroute autoroute_b)
     {
