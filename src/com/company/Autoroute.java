@@ -15,12 +15,12 @@ public class Autoroute {
     {
         ++id_autoroute;
         this.circonference = id_autoroute * 50;
-        this.nb_acces = l_acces.size();
         this.l_vehicule = new ArrayList<Vehicule>();
 
         this.l_acces = new ArrayList<Acces>(nb_acces); //risque de péter car il n'y a rien dedans
         for (int i = 0; i < nb_acces; i++)
             this.l_acces.add(new Acces());
+        this.nb_acces = l_acces.size();
 
         int mat_rand = (int)Math.floor(Math.random()*(3-1+1)+1);
         switch (mat_rand)
@@ -51,6 +51,8 @@ public class Autoroute {
         this.l_vehicule = new ArrayList<Vehicule>();
         int rand_nb_acces = (int)Math.floor(Math.random()*(6-2+1)+2);
         this.l_acces = new ArrayList<Acces>(rand_nb_acces);
+        for (int i = 0; i < rand_nb_acces; i++)
+            this.l_acces.add(new Acces());
         this.nb_acces = l_acces.size();
         int mat_rand = (int)Math.floor(Math.random()*(3-1+1)+1);
         switch (mat_rand)
@@ -103,6 +105,7 @@ public class Autoroute {
     {
         Vehicule v = l_vehicule.get(id);
         v.setPosition(v.getPosition() + v.getVitesse());
+        System.out.println("Ce vehicule vient de move : " + v.toString());
         return v;
     }
 
@@ -118,23 +121,24 @@ public class Autoroute {
         Vehicule v;
         Vehicule w;
         boolean bAccident = true;
-        int nb_vehicule = l_vehicule.size();
+        int nb_vehicule = this.l_vehicule.size();
+        System.out.println("nombre de vehicule dans prediction : " + nb_vehicule);
         for (int i = 0; i < nb_vehicule-1; i++)
         {
             if(l_vehicule.get(i).idVehicule == id)
             {
-                v = l_vehicule.get(i);
-                w = l_vehicule.get(i + 1);
+                v = l_vehicule.get(i + 1);
+                w = l_vehicule.get(i);
                 for (int j = i; j < nb_vehicule - 1; j++)
                 {
                     Vehicule a, b;
-                    a = l_vehicule.get(i);
-                    b = l_vehicule.get(j+1);
+                    a = l_vehicule.get(j+1);
+                    b = l_vehicule.get(i);
 
                     try {
                         int positionA, positionB;
-                        positionA = simulation_move_car(simulation_move_car(a.getIdVehicule()));
-                        positionB = simulation_move_car(simulation_move_car(b.getIdVehicule()));
+                        positionA = simulation_move_car(a.getIdVehicule()) + simulation_move_car(a.getIdVehicule());
+                        positionB = simulation_move_car(b.getIdVehicule()) + simulation_move_car(b.getIdVehicule());
                         if (positionA >= positionB)
                         {
                             for (int k = 0; k < nb_acces; k++)
@@ -156,6 +160,7 @@ public class Autoroute {
                     catch (Exception e)
                     {
                         System.out.println(e.getMessage());
+                        e.printStackTrace();
                         System.out.println("Accident");
                     }
                 }

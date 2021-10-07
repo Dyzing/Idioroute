@@ -37,6 +37,7 @@ public class Idioroute {
         List<Vehicule> lv = l_autoroute.get(0).getL_vehicule();
         lv.add(v);
         System.out.println("Une vehicule vient de se rajouter : " + lv.get(lv.size()-1).toString());
+        System.out.println("nombre de vehicule après generate : " + lv.size());
 
     }
 
@@ -114,12 +115,14 @@ public class Idioroute {
    public void run()
    {
        generate_vehicule();
+       l_autoroute.get(0).getL_vehicule().get(0).setPosition(l_autoroute.get(0).simulation_move_car(0));
+       System.out.println("Ce vehicule vient de simulation_move_car : " + l_autoroute.get(0).getL_vehicule().get(0).toString());
+
        Timer timer = new Timer();
        TimerTask task = new TimerTask() {
            @Override
            public void run() {
 
-               System.out.println("nb auto : " + l_autoroute.size());
                for (int i = 0; i < l_autoroute.size(); i++)
                {
                    List<Vehicule> l_vehicule = l_autoroute.get(i).getL_vehicule();
@@ -128,12 +131,11 @@ public class Idioroute {
 
                    for (int j = 0; j < list_vehi_size; j++)
                    {
-                       System.out.println("rentre dans prediction ?");
                        Vehicule v = l_vehicule.get(j);
                        System.out.println("Info du vehicule avant prediction : " + v.toString());
                        int id = v.getIdVehicule();
-                       l_autoroute.get(i).prediction_move_car(id);
                        generate_vehicule();
+                       l_autoroute.get(i).prediction_move_car(id);
                        gestion_accident();
                    }
                }
