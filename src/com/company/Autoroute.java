@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Autoroute {
-    private int id_autoroute;
+    private static int id_autoroute;
     private List<Acces> l_acces;
     private List<Vehicule> l_vehicule;
     private int nb_acces;
@@ -13,7 +13,7 @@ public class Autoroute {
 
     public Autoroute(int nb_acces)
     {
-        ++id_autoroute;
+        this.id_autoroute = ++id_autoroute;
         this.circonference = id_autoroute * 50;
         this.l_vehicule = new ArrayList<Vehicule>();
 
@@ -41,19 +41,29 @@ public class Autoroute {
 
         for (int i = 0; i < nb_acces; i++)
         {
+            if(i == 0)
+            {
+                l_acces.get(i).setIs_entry(true);
+            }
+            else if(i == nb_acces - 1)
+            {
+                l_acces.get(i).setIs_exit(true);
+            }
+
             this.l_acces.get(i).setEmplacement(((circonference)/nb_acces) * i);
         }
     }
 
     public Autoroute()
     {
-        this.circonference = id_autoroute * 50;
+        this.id_autoroute = ++id_autoroute;
+        this.circonference = (6 - id_autoroute) * 240;
         this.l_vehicule = new ArrayList<Vehicule>();
         int rand_nb_acces = (int)Math.floor(Math.random()*(6-2+1)+2);
         this.l_acces = new ArrayList<Acces>(rand_nb_acces);
         for (int i = 0; i < rand_nb_acces; i++)
             this.l_acces.add(new Acces());
-        this.nb_acces = l_acces.size();
+        this.nb_acces = rand_nb_acces;
         int mat_rand = (int)Math.floor(Math.random()*(3-1+1)+1);
         switch (mat_rand)
         {
@@ -73,6 +83,15 @@ public class Autoroute {
 
         for (int i = 0; i < nb_acces; i++)
         {
+            if(i == 0)
+            {
+                l_acces.get(i).setIs_entry(true);
+            }
+            else if(i == nb_acces - 1)
+            {
+                l_acces.get(i).setIs_exit(true);
+            }
+
             this.l_acces.get(i).setEmplacement(((circonference)/nb_acces) * i);
         }
     }
@@ -127,13 +146,13 @@ public class Autoroute {
         {
             if(l_vehicule.get(i).getIdVehicule() == id)
             {
-                v = l_vehicule.get(i + 1);
-                w = l_vehicule.get(i);
-                for (int j = i; j < nb_vehicule - 1; j++)
+                v = l_vehicule.get(i);
+                w = l_vehicule.get(i + 1);
+                for (int j = i; j > 0 ; j--)
                 {
                     Vehicule a, b;
-                    a = l_vehicule.get(j+1);
-                    b = l_vehicule.get(i);
+                    b = l_vehicule.get(j-1);
+                    a = l_vehicule.get(i);
 
                     try {
                         int positionA, positionB;
@@ -143,9 +162,10 @@ public class Autoroute {
                         {
                             for (int k = 0; k < nb_acces; k++)
                             {
-                                if((v.getPosition() <= l_acces.get(k).getEmplacement()) && (l_acces.get(k).getEmplacement() <= w.getPosition()))
+                                if((v.getPosition() <= l_acces.get(k).getEmplacement()) && (l_acces.get(k).getEmplacement() <= positionB))
                                 {
                                     //gerer l'évitemment de accident -> appel à une fonction d'Idioroute avec acces et voiture en paramètre
+                                    System.out.println("******************** EVITE ***************");
                                     v.setNeed_move(true);
                                     bAccident = false;
                                     break;
@@ -162,6 +182,7 @@ public class Autoroute {
                         System.out.println(e.getMessage());
                         e.printStackTrace();
                         System.out.println("Accident");
+                        return;
                     }
                 }
 

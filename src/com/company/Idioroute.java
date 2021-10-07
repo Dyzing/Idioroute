@@ -86,7 +86,7 @@ public class Idioroute {
                         if(v.getPosition() == l_acces.get(k).getEmplacement())
                         {
                             l_vehicule.remove(v);
-                            if(i == 0)
+                            if(i == 0) //A CHANGER
                             {
                                 l_autoroute.get(i + 1).getL_vehicule().add(v);
                             }
@@ -118,7 +118,8 @@ public class Idioroute {
        TimerTask task = new TimerTask() {
            @Override
            public void run() {
-
+               generate_vehicule();
+               gestion_accident();
                for (int i = 0; i < l_autoroute.size(); i++)
                {
                    List<Vehicule> l_vehicule = l_autoroute.get(i).getL_vehicule();
@@ -130,12 +131,9 @@ public class Idioroute {
                        Vehicule v = l_vehicule.get(j);
                        System.out.println("Info du vehicule avant prediction : " + v.toString());
                        int id = v.getIdVehicule();
-                       generate_vehicule();
                        l_autoroute.get(i).prediction_move_car(id);
-                       gestion_accident();
                    }
                }
-
            }
        };
        timer.scheduleAtFixedRate(task, 0,2000);//wait 0 ms before doing the action and do it evry 1000ms (1second)

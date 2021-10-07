@@ -39,8 +39,7 @@ public class Camion extends Vehicule {
 
     @Override
     public void setVitesse(int vitesse) {
-        int vitessemoto = vitesse*8;
-        super.setVitesse(vitessemoto);
+        super.setVitesse(vitesse);
     }
 
     @Override
@@ -60,7 +59,7 @@ public class Camion extends Vehicule {
 
     @Override
     public String toString() {
-        return "Camion{" +
+        return "Camion pouet-pouet{" +
                 "vitesse=" + getVitesse() +
                 ", idAutoroute=" + getIdAutoroute() +
                 ", idVehicule=" + getIdVehicule() +
