@@ -93,17 +93,19 @@ public class Idioroute {
                             {
                                 l_vehicule.get(x).setIdVehicule(x - 1);
                             }
-                            if(i == 5) //A CHANGER
+                            if(i >= 5) //A CHANGER
                             {
                                 l_autoroute.get(i - 1).getL_vehicule().add(v);
                                 v.setIdVehicule(l_autoroute.get(i - 1).getL_vehicule().size());
                                 v.setIdAutoroute(i - 1);
+                                l_autoroute.get(i - 1).move_car(v.getIdVehicule());
                             }
                             else
                             {
                                 l_autoroute.get(i + 1).getL_vehicule().add(v);
                                 v.setIdVehicule(l_autoroute.get(i + 1).getL_vehicule().size());
                                 v.setIdAutoroute(i + 1);
+                                l_autoroute.get(i + 1).move_car(v.getIdVehicule());
                             }
                             updated = true;
                         }
