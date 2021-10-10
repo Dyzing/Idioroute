@@ -54,7 +54,7 @@ public abstract class Vehicule {
 
     public Vehicule() {
         this.idVehicule = genId.getAndIncrement();
-        this.idAutoroute = 5;
+        this.idAutoroute = 0;
         this.position = 0;
         this.need_move = false;
 

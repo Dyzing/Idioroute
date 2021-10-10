@@ -124,7 +124,7 @@ public class Autoroute {
     {
         Vehicule v = l_vehicule.get(id);
         v.setPosition(v.getPosition() + v.getVitesse());
-        System.out.println("Ce vehicule vient de move : " + v.toString());
+        System.out.println("Ce vehicule vient de move : " + v.toString() + "\n");
         return v;
     }
 
@@ -165,7 +165,7 @@ public class Autoroute {
                                 if((v.getPosition() <= l_acces.get(k).getEmplacement()) && (l_acces.get(k).getEmplacement() <= positionB))
                                 {
                                     //gerer l'évitemment de accident -> appel à une fonction d'Idioroute avec acces et voiture en paramètre
-                                    System.out.println("******************** EVITE ***************");
+                                    System.out.println("\n******************** EVITE ***************n\n");
                                     v.setNeed_move(true);
                                     bAccident = false;
                                     break;
@@ -181,14 +181,15 @@ public class Autoroute {
                     {
                         System.out.println(e.getMessage());
                         e.printStackTrace();
-                        System.out.println("Accident");
+                        System.out.println("Accident entre " + a + " et " + b);
+                        System.exit(1);
                         return;
                     }
                 }
-
-                v = move_car(i);
-                System.out.println("Un vehicule a bougé : " + v.toString());
-                break;
+                if(!v.isNeed_move())
+                {
+                    v = move_car(i);
+                }
             }
         }
     }

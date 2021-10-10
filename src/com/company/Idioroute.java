@@ -75,32 +75,43 @@ public class Idioroute {
             List<Vehicule> l_vehicule = l_autoroute.get(i).getL_vehicule();
 
             int list_vehi_size = l_vehicule.size();
-            for (int j = 0; j < list_vehi_size; j++)
+            for (int j = 0; j < l_vehicule.size()-1; j++)
             {
                 Vehicule v = l_vehicule.get(j);
                 if(v.isNeed_move() == true)
                 {
                     int list_acces_size = l_acces.size();
-                    for(int k = 0; k < list_acces_size; k++)
+                    int k = 0;
+                    while(k < list_acces_size && !updated)
                     {
-                        if(v.getPosition() == l_acces.get(k).getEmplacement())
+                        if(v.getPosition() <= l_acces.get(k).getEmplacement() + v.getVitesse() && v.getPosition() >= l_acces.get(k).getEmplacement() - v.getVitesse())
                         {
                             l_vehicule.remove(v);
-                            if(i == 0) //A CHANGER
+                            v.setPosition(0);
+                            //--j;
+                            for (int x = v.getIdVehicule() +1; x < l_vehicule.size() -1; x++)
                             {
-                                l_autoroute.get(i + 1).getL_vehicule().add(v);
+                                l_vehicule.get(x).setIdVehicule(x - 1);
+                            }
+                            if(i == 5) //A CHANGER
+                            {
+                                l_autoroute.get(i - 1).getL_vehicule().add(v);
+                                v.setIdVehicule(l_autoroute.get(i - 1).getL_vehicule().size());
+                                v.setIdAutoroute(i - 1);
                             }
                             else
                             {
-                                l_autoroute.get(i - 1).getL_vehicule().add(v);
+                                l_autoroute.get(i + 1).getL_vehicule().add(v);
+                                v.setIdVehicule(l_autoroute.get(i + 1).getL_vehicule().size());
+                                v.setIdAutoroute(i + 1);
                             }
                             updated = true;
                         }
-                        if(updated)
-                        {
-                            updated = false;
-                            break;
-                        }
+                        k++;
+                    }
+                    if(updated)
+                    {
+                        updated = false;
                     }
                 }
             }
@@ -119,20 +130,21 @@ public class Idioroute {
            @Override
            public void run() {
                generate_vehicule();
-               gestion_accident();
                for (int i = 0; i < l_autoroute.size(); i++)
                {
                    List<Vehicule> l_vehicule = l_autoroute.get(i).getL_vehicule();
                    int list_vehi_size = l_vehicule.size();
                    System.out.println("autoroute n°" + i + " nb vehi : " + list_vehi_size);
 
-                   for (int j = 0; j < list_vehi_size; j++)
+                   for (int j = 0; j < l_vehicule.size() -1; j++)
                    {
                        Vehicule v = l_vehicule.get(j);
                        System.out.println("Info du vehicule avant prediction : " + v.toString());
                        int id = v.getIdVehicule();
                        l_autoroute.get(i).prediction_move_car(id);
+                       gestion_accident();
                    }
+                   System.out.println("\n");
                }
            }
        };
