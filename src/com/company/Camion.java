@@ -59,7 +59,7 @@ public class Camion extends Vehicule {
 
     @Override
     public String toString() {
-        return "Camion pouet-pouet{" +
+        return "Camion{" +
                 "vitesse=" + getVitesse() +
                 ", idAutoroute=" + getIdAutoroute() +
                 ", idVehicule=" + getIdVehicule() +

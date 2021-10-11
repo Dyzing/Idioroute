@@ -36,8 +36,7 @@ public class Idioroute {
 
         List<Vehicule> lv = l_autoroute.get(0).getL_vehicule();
         lv.add(v);
-        System.out.println("Une vehicule vient de se rajouter : " + lv.get(lv.size()-1).toString());
-        System.out.println("nombre de vehicule après generate : " + lv.size());
+        System.out.println("Une vehicule vient d'entrer dans l'autoroute 0 : " + lv.get(lv.size()-1).toString() + "\n");
 
     }
 
@@ -98,14 +97,14 @@ public class Idioroute {
                                 l_autoroute.get(i - 1).getL_vehicule().add(v);
                                 v.setIdVehicule(l_autoroute.get(i - 1).getL_vehicule().size());
                                 v.setIdAutoroute(i - 1);
-                                l_autoroute.get(i - 1).move_car(v.getIdVehicule());
+                                l_autoroute.get(i - 1).move_car(v.getIdVehicule() -1);
                             }
                             else
                             {
                                 l_autoroute.get(i + 1).getL_vehicule().add(v);
                                 v.setIdVehicule(l_autoroute.get(i + 1).getL_vehicule().size());
                                 v.setIdAutoroute(i + 1);
-                                l_autoroute.get(i + 1).move_car(v.getIdVehicule());
+                                l_autoroute.get(i + 1).move_car(v.getIdVehicule() -1);
                             }
                             updated = true;
                         }
@@ -136,12 +135,12 @@ public class Idioroute {
                {
                    List<Vehicule> l_vehicule = l_autoroute.get(i).getL_vehicule();
                    int list_vehi_size = l_vehicule.size();
-                   System.out.println("autoroute n°" + i + " nb vehi : " + list_vehi_size);
+                   System.out.println("autoroute n°" + i + " nb vehi : " + list_vehi_size + "\n");
 
                    for (int j = 0; j < l_vehicule.size() -1; j++)
                    {
                        Vehicule v = l_vehicule.get(j);
-                       System.out.println("Info du vehicule avant prediction : " + v.toString());
+                       System.out.println("Info du vehicule avant movement : " + v.toString());
                        int id = v.getIdVehicule();
                        l_autoroute.get(i).prediction_move_car(id);
                        gestion_accident();
@@ -150,6 +149,6 @@ public class Idioroute {
                }
            }
        };
-       timer.scheduleAtFixedRate(task, 0,2000);//wait 0 ms before doing the action and do it evry 1000ms (1second)
+       timer.scheduleAtFixedRate(task, 0,1000);//wait 0 ms before doing the action and do it evry 1000ms (1second)
    }
 }

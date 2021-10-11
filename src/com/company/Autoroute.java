@@ -141,7 +141,6 @@ public class Autoroute {
         Vehicule w;
         boolean bAccident = true;
         int nb_vehicule = this.l_vehicule.size();
-        System.out.println("nombre de vehicule dans prediction : " + nb_vehicule);
         for (int i = 0; i < nb_vehicule-1; i++)
         {
             if(l_vehicule.get(i).getIdVehicule() == id)
